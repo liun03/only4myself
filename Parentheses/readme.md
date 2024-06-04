@@ -73,7 +73,8 @@ Please input a valid mathematical expression or type 'exit' to exit the program:
 1 + (2)
 Remove unnecessary parentheses: 1 + 2
 ```
-
+**NOTE: When we type "up", "down", "left", and "right" in the terminal, there are some unexpected chars appeared.
+Recommend that coping the expression somewhere and paste it to the terminal.**
 
 ## (Optional) Build  project
 Before build the project, make sure that JAVA is installed in the environment (> JAVA 8)
