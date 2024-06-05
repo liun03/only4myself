@@ -74,13 +74,13 @@ Because `-` can behind `*`, and `/`, need to introduce special cases
    java 11: `brew install openjdk@11`
    java 17: `brew install openjdk@17`
 2. Execute jar
-   `java -jar Parentheses-0.1.0.jar`
+   `java -jar Parentheses-0.2.0.jar`
 
 ### Run in docker
 Need to download the image from Docker hub and make sure connection to the internet is available)
 1. Download the docker from https://www.docker.com/products/docker-desktop/ and install it.
    mac:  `brew install docker`
-2. Execute `docker run --rm -i liun03/parentheses_service:0.1.0` and we can see (ignored the docker pull messages):
+2. Execute `docker run --rm -i liun03/parentheses_service:0.2.0` and we can see (ignored the docker pull messages):
 ```
 ******************************
 Please input a valid mathematical expression or type 'exit' to exit the program:
@@ -96,12 +96,12 @@ Before build the project, make sure that JAVA is installed in the environment (>
 ```
 ./mvnw clean install
 ```
-After build the project, we can find the executable jar file `Parentheses-0.1.0.jar` in the `./target`.
+After build the project, we can find the executable jar file `Parentheses-0.2.0.jar` in the `./target`.
 We have no extra lib for the executable jar and we do not handle it. If we want to add extra libs for the jar, we should modify the POM.
 
 ### Build image
 Befor build the image, you should execute `Build the maven codes` and generate the executable jar.
 It is a sample image build and you can modify the name and tag by yourself.
 ```
-docker build -t liun03/parentheses_service:0.1.0 .
+docker build -t liun03/parentheses_service:0.2.0 .
 ```
