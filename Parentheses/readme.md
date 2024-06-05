@@ -47,7 +47,21 @@ Invalid: `a(a)`, `1(1)`
 | `(` `)` | Open Parentheses must be closed in the correct order|`)(`, `)`, `(()(` |
 | operand | there are no spaces between the operand | `1 1+1`, `a b`, `a*(b + c d)`|
 
+## Special Cases
+Because `-` can behind `*`, and `/`, need to introduce special cases
+-(1*2) can be simplified -1*2
+### Special valid cases
+1. `1*-2`, `1/-2`
+2. `1*-(2+3)`, `1/-(2+3)`
 
+### Special removal parentheses expressions
+1. `-(1/2) -> -1/2`
+2. `-(1*2) -> -1*2`
+3. `-(1*2)*(3/4) -> -1*2*3/4`
+4. `-(1*2/(2+3)) -> -1*2/(2+3)`
+5. `5*-(1*2/(2+3)) -> 5*-1*2/(2+3)`
+6. `5*-((1+2)*3)/7 -> 5*-(1+2)*3/7`
+7. `5*-((1+2)*3)/-7 -> 5*-(1+2)*3/-7`
 
 
 ## How to execute the program (Choose one)

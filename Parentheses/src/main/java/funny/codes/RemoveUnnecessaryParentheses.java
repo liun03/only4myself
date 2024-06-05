@@ -26,7 +26,13 @@ public final class RemoveUnnecessaryParentheses {
       Arrays.asList(PLUS_CHAR, MINUS_CHAR, MULTIPLY_CHAR, DIVIDE_CHAR));
 
   private final static Set<Character> CHECK_MINUS_AS_OPERAND = new HashSet<>(
-      Arrays.asList(PLUS_CHAR, MINUS_CHAR, MULTIPLY_CHAR, DIVIDE_CHAR, OPEN_PAREN_CHAR));
+      Arrays.asList(MULTIPLY_CHAR, DIVIDE_CHAR, OPEN_PAREN_CHAR));
+
+  private final static Set<Character> BEFORE_NON_ACCEPT = new HashSet<>(
+      Arrays.asList(PLUS_CHAR, MINUS_CHAR));
+
+  private final static Set<Character> MINUS_OPERAND_REMAINED_PARENT = new HashSet<>(
+      Arrays.asList(PLUS_CHAR, MINUS_CHAR));
 
   private final static Set<Character> BEFORE_PLUS_MULTIPLE_DIVIDE_NON_ACCEPT = new HashSet<>(
       Arrays.asList(PLUS_CHAR, MINUS_CHAR, MULTIPLY_CHAR, DIVIDE_CHAR, OPEN_PAREN_CHAR));
@@ -44,8 +50,10 @@ public final class RemoveUnnecessaryParentheses {
     Set<Integer> plusMinusSet = new HashSet<>();
     Set<Integer> remaindedParensSet = new HashSet<>();
     Set<Integer> multiplyDevideSet = new HashSet<>();
+    Set<Integer> negativeSet = new HashSet<>();
 
     char previousChar = OPEN_PAREN_CHAR;
+    char pre2PosChar = OPEN_PAREN_CHAR;
     for (int i = 0; i < len; i++) {
       char currentChar = inputExpression.charAt(i);
       if (currentChar == OPEN_PAREN_CHAR) {
@@ -73,6 +81,12 @@ public final class RemoveUnnecessaryParentheses {
           if (i + 1 < len && OP_PARENTHESES_SPACE_SET.contains(inputExpression.charAt(i + 1))) {
             throwUnexpectedChar(currentChar, i + 1);
           }
+          if (!parenStack.isEmpty() && MINUS_OPERAND_REMAINED_PARENT.contains(pre2PosChar)) {
+            belongToParenPos[i] = parenStack.peek();
+            negativeSet.add(parenStack.peek());
+          }
+        } else if (BEFORE_NON_ACCEPT.contains(previousChar)) {
+          throwUnexpectedChar(currentChar, i + 1);
         } else {
           if (!parenStack.isEmpty()) {
             belongToParenPos[i] = parenStack.peek();
@@ -105,6 +119,7 @@ public final class RemoveUnnecessaryParentheses {
         }
       }
       if (currentChar != SPACE_CHAR) {
+        pre2PosChar = previousChar;
         previousChar = currentChar;
       }
     }
@@ -119,15 +134,29 @@ public final class RemoveUnnecessaryParentheses {
 
     for (int i = 0; i < len; i++) {
       if (inputExpression.charAt(i) != MULTIPLY_CHAR && inputExpression.charAt(i) != DIVIDE_CHAR
-          && inputExpression.charAt(i) != MINUS_CHAR) {
+          && inputExpression.charAt(i) != MINUS_CHAR && inputExpression.charAt(i) != PLUS_CHAR) {
         continue;
       }
       int nextCharPos = i + 1;
+      if (inputExpression.charAt(i) == PLUS_CHAR) {
+        while (nextCharPos < len && (inputExpression.charAt(nextCharPos) == OPEN_PAREN_CHAR)
+            || inputExpression.charAt(nextCharPos) == SPACE_CHAR) {
+          if (inputExpression.charAt(nextCharPos) != SPACE_CHAR && negativeSet.contains(
+              belongToParenPos[nextCharPos])) {
+            remaindedParensSet.add(nextCharPos);
+            break;
+          }
+          nextCharPos++;
+        }
+        continue;
+      }
+      nextCharPos = i + 1;
       if (inputExpression.charAt(i) == MINUS_CHAR) {
         while (nextCharPos < len && (inputExpression.charAt(nextCharPos) == OPEN_PAREN_CHAR)
             || inputExpression.charAt(nextCharPos) == SPACE_CHAR) {
-          if (inputExpression.charAt(nextCharPos) != SPACE_CHAR && plusMinusSet.contains(
-              belongToParenPos[nextCharPos])) {
+          if (inputExpression.charAt(nextCharPos) != SPACE_CHAR && (plusMinusSet.contains(
+              belongToParenPos[nextCharPos]) || negativeSet.contains(
+              belongToParenPos[nextCharPos]))) {
             remaindedParensSet.add(nextCharPos);
             break;
           }
