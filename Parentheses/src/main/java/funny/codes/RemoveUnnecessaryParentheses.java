@@ -35,7 +35,7 @@ public final class RemoveUnnecessaryParentheses {
       Arrays.asList(PLUS_CHAR, MINUS_CHAR, MULTIPLY_CHAR, DIVIDE_CHAR, OPEN_PAREN_CHAR));
 
   private final static Set<Character> OP_PARENTHESES_SPACE_SET = new HashSet<>(
-      Arrays.asList(PLUS_CHAR, MINUS_CHAR, MULTIPLY_CHAR, DIVIDE_CHAR, OPEN_PAREN_CHAR, SPACE_CHAR));
+      Arrays.asList(PLUS_CHAR, MINUS_CHAR, MULTIPLY_CHAR, DIVIDE_CHAR, SPACE_CHAR));
 
   public static String removeUnnecessaryParentheses(String inputExpression) {
     int len = inputExpression.length();
