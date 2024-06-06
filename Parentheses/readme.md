@@ -49,6 +49,9 @@ Invalid: `a(a)`, `1(1)`
 
 ## Special Cases
 Because `-` can be behind `*`, and `/`, need to introduce special cases
+```
+A negative number is able to operate with `*` and `/` but not `+` and `-`.
+```
 
 ### Special valid cases
 1. `1*-2`, `1/-2`
