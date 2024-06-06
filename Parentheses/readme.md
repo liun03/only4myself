@@ -31,8 +31,8 @@ There two kinds of parentheses: open and close
 Invalid: `a(a)`, `1(1)`
 
 ### Sample valid and invalid data
-1. valid data in unit tests: `/src/main/resources/data.csv`
-2. invalid data in unit tests: `invalid_data.csv`
+1. valid data in unit tests: [data.csv](https://github.com/liun03/only4myself/blob/main/Parentheses/src/main/resources/data.csv)
+2. invalid data in unit tests: [invalid_data.csv](https://github.com/liun03/only4myself/blob/main/Parentheses/src/main/resources/invalid_data.csv)
 
 ### Limitation summary
 | Operators | Rules | Invalid | 
@@ -48,8 +48,8 @@ Invalid: `a(a)`, `1(1)`
 | operand | there are no spaces between the operand | `1 1+1`, `a b`, `a*(b + c d)`|
 
 ## Special Cases
-Because `-` can behind `*`, and `/`, need to introduce special cases
--(1*2) can be simplified -1*2
+Because `-` can be behind `*`, and `/`, need to introduce special cases
+
 ### Special valid cases
 1. `1*-2`, `1/-2`
 2. `1*-(2+3)`, `1/-(2+3)`
@@ -64,7 +64,7 @@ Because `-` can behind `*`, and `/`, need to introduce special cases
 7. `5*-((1+2)*3)/-7 -> 5*-(1+2)*3/-7`
 8. `1+((-2))" -> "1+(-2)`
 
-Also, we can refer to `/src/main/resources/data.csv` to check the test cases.
+Also, we can refer to [data.csv](https://github.com/liun03/only4myself/blob/main/Parentheses/src/main/resources/data.csv) to check the test cases.
 
 
 ## How to execute the program (Choose one)
