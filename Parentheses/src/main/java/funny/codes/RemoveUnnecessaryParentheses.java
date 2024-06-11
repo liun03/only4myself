@@ -161,21 +161,25 @@ public final class RemoveUnnecessaryParentheses {
         continue;
       }
       nextCharPos = i + 1;
-      while (nextCharPos < len && (inputExpression.charAt(nextCharPos) == OPEN_PAREN_CHAR
-          || inputExpression.charAt(nextCharPos) == SPACE_CHAR)) {
-        if (inputExpression.charAt(nextCharPos) != SPACE_CHAR && plusMinusSet.contains(
-            belongToParenPos[nextCharPos])) {
-          remaindedParensSet.add(nextCharPos);
-          break;
+      if (inputExpression.charAt(i) == MULTIPLY_CHAR) {
+        while (nextCharPos < len && (inputExpression.charAt(nextCharPos) == OPEN_PAREN_CHAR
+            || inputExpression.charAt(nextCharPos) == SPACE_CHAR)) {
+          if (inputExpression.charAt(nextCharPos) != SPACE_CHAR && plusMinusSet.contains(
+              belongToParenPos[nextCharPos])) {
+            remaindedParensSet.add(nextCharPos);
+            break;
+          }
+          nextCharPos++;
         }
-        nextCharPos++;
       }
+
       if (inputExpression.charAt(i) == DIVIDE_CHAR) {
         nextCharPos = i + 1;
         while (nextCharPos < len && (inputExpression.charAt(nextCharPos) == OPEN_PAREN_CHAR
             || inputExpression.charAt(nextCharPos) == SPACE_CHAR)) {
-          if (inputExpression.charAt(nextCharPos) != SPACE_CHAR && multiplyDevideSet.contains(
-              belongToParenPos[nextCharPos])) {
+          if (inputExpression.charAt(nextCharPos) != SPACE_CHAR && (multiplyDevideSet.contains(
+              belongToParenPos[nextCharPos]) || plusMinusSet.contains(
+              belongToParenPos[nextCharPos]))) {
             remaindedParensSet.add(nextCharPos);
             break;
           }
