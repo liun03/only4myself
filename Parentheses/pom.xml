@@ -6,7 +6,7 @@
 
   <groupId>funny.codes</groupId>
   <artifactId>Parentheses</artifactId>
-  <version>0.3.0</version>
+  <version>0.5.0</version>
 
   <properties>
     <maven.compiler.source>8</maven.compiler.source>
