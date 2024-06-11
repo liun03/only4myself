@@ -47,7 +47,7 @@ public final class RemoveUnnecessaryParentheses {
     Stack<Integer> parenStack = new Stack<>();
     Set<Integer> plusMinusSet = new HashSet<>();
     Set<Integer> remaindedParensSet = new HashSet<>();
-    Set<Integer> multiplyDevideSet = new HashSet<>();
+    Set<Integer> multiplyDivideSet = new HashSet<>();
     Set<Integer> negativeSet = new HashSet<>();
 
     char previousChar = OPEN_PAREN_CHAR;
@@ -97,7 +97,7 @@ public final class RemoveUnnecessaryParentheses {
         }
         if (!parenStack.isEmpty()) {
           belongToParenPos[i] = parenStack.peek();
-          multiplyDevideSet.add(parenStack.peek());
+          multiplyDivideSet.add(parenStack.peek());
         }
       } else {
         // common chars cannot follow a closing parenthesis, except for a space ' '
@@ -177,7 +177,7 @@ public final class RemoveUnnecessaryParentheses {
         nextCharPos = i + 1;
         while (nextCharPos < len && (inputExpression.charAt(nextCharPos) == OPEN_PAREN_CHAR
             || inputExpression.charAt(nextCharPos) == SPACE_CHAR)) {
-          if (inputExpression.charAt(nextCharPos) != SPACE_CHAR && (multiplyDevideSet.contains(
+          if (inputExpression.charAt(nextCharPos) != SPACE_CHAR && (multiplyDivideSet.contains(
               belongToParenPos[nextCharPos]) || plusMinusSet.contains(
               belongToParenPos[nextCharPos]))) {
             remaindedParensSet.add(nextCharPos);
